@@ -5,7 +5,9 @@ regular-season performance. See PLAN.md for rules, rubric, timeline and ideas.
 
 ## Commands
 - `uv sync` · `./scripts/download_data.sh` · `uv run jupyter lab`
-- `uv run python scripts/build_pulls.py` → `data/processed/pulls/*.parquet` (~seconds)
+- `uv run python scripts/build_pulls.py` → `data/processed/pulls/*.parquet` (~seconds; run first,
+  it writes `ol_sides.parquet`)
+- `uv run python scripts/build_drive.py` → `data/processed/drive/*.parquet` (~seconds)
 - `uv run pytest -q tests` · `uv run ruff check .`
 
 ## Layout
@@ -23,6 +25,13 @@ regular-season performance. See PLAN.md for rules, rubric, timeline and ideas.
   with 2+ tracked rookie linemen; `player_sides()` propagates the majority side per
   player-game → season → career (`side_source`). Game-level sides are ~97% self-consistent;
   season/career fallbacks ~87% (rookies switch sides between games).
+- `src/bdb27/drive.py`: **current focus.** Drive (downhill) run blocks. No Combine OL drill
+  matches a drive block (contact comes within ~1 yd), so this links Combine *traits* (first
+  0.5 s of the tracked 40, momentum = weight x speed, measurables) to game *outcomes* on drive
+  snaps (first step within 60 deg of upfield, |lateral| <= 1.5 yd through 1.5 s): get-off,
+  first-step speed, upfield yd at 1.0/1.5/2.5 s, contact + drive after contact.
+  Pulls (`pulls.py`) are parked until the pull-vs-zone labeling question is settled.
+- Missing metrics are null, not NaN (`fill_nan(None)`), so flags derived from them stay null.
 - `notebooks/`: numbered exploration notebooks.
 - `figures/`: exported figures for the writeup. `writeup/`: writeup drafts.
 

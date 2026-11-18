@@ -105,6 +105,25 @@ It shows the drop-back rule mixes schemes: only 30–40% of tackle "pulls" cross
 flow). **Next: cluster resampled 0–2.5 s paths (with side/crossing as features) to separate gap
 pulls, zone flow and reach steps, and check clusters against hand-labelled snaps.**
 
+### Current focus (2026-11-17): drive blocks; pulls parked
+Pulls are on hold while the pull-vs-zone distinction is researched (automatic path clusters
+couldn't separate them cleanly; see above). Working on **drive / downhill run blocks** instead
+(`bdb27.drive`, `scripts/build_drive.py`).
+- Framing: no tracked Combine drill involves contact, and drive blockers meet the defender within
+  ~1 yd, so this is Combine **traits** → game **outcomes**, not same-movement matching.
+- Combine: 179 OL 40 reps / 95 linemen; first-0.5 s burst metrics. Rep-to-rep r = 0.40–0.58
+  (peak accel best), so average the two reps.
+- Game: 9,431 drive snaps (first step within 60° of upfield, narrow). 45 linemen have a tracked
+  40 and ≥ 50 drive snaps. Medians: get-off 0.2 s, 0.73 yd upfield at 1.0 s, 1.98 yd at 2.5 s.
+- Split-half reliability (57 linemen, ≥ 50 snaps): get-off 0.85, first-step speed 0.87,
+  yd at 1.0 s 0.84, yd at 2.5 s 0.70, drive after contact 0.55, stall 0.51, pushed back 0.26.
+  Pre-contact traits are stable; post-contact outcomes are noisier.
+- Known gap: the contact detector (sharp 25% slowdown) finds contact on only 41% of drive snaps.
+  Gradual engagements are missed, so post-contact metrics cover a biased subset. Improve before
+  leaning on them.
+- Next: Combine burst/measurables vs. game drive metrics (partial pooling by T vs. interior,
+  controlling for draft pick), then drive metrics vs. run EPA through the lineman's gap.
+
 ### Metrics to compare (same definition in drill and game)
 Get-off (time to first movement / first 1 yd), lateral acceleration and top lateral speed,
 time to 5 yd lateral, depth lost (how far he drops behind the line), path tightness (distance

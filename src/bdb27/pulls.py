@@ -260,7 +260,7 @@ def combine_pull_metrics(frames: pl.DataFrame | None = None) -> pl.DataFrame:
         m = rep_metrics(*(r[c].to_numpy() for c in ("t_raw", "x", "y", "s", "a")))
         rows.append({"rep_id": rep_id, "nfl_id": r["nfl_id"][0], "drill_name": r["drill_name"][0],
                      "attempt": r["attempt"][0], **m})
-    return pl.DataFrame(rows)
+    return pl.DataFrame(rows).fill_nan(None)  # missing metric = null, not NaN
 
 
 def game_pull_metrics(frames: pl.DataFrame, pulls: pl.DataFrame) -> pl.DataFrame:
@@ -274,4 +274,4 @@ def game_pull_metrics(frames: pl.DataFrame, pulls: pl.DataFrame) -> pl.DataFrame
         m = rep_metrics(*(r[c].to_numpy() for c in ("t_snap", "fx", "fy", "s", "a")), upfield=up)
         m["getoff_s"] = m.pop("onset_t")  # in games the anchor is the snap, so onset = get-off
         rows.append(dict(zip(k, key), **m))
-    return pl.DataFrame(rows)
+    return pl.DataFrame(rows).fill_nan(None)  # missing metric = null, not NaN
