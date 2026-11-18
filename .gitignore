@@ -1,0 +1,13 @@
+# Competition data is CC BY-NC 4.0 and ~2.3 GB: never commit it
+data/
+*.zip
+*.parquet
+*.csv
+
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.deepeval/
+kaggle.json
