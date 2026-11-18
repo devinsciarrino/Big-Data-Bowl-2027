@@ -8,6 +8,7 @@ regular-season performance. See PLAN.md for rules, rubric, timeline and ideas.
 - `uv run python scripts/build_pulls.py` → `data/processed/pulls/*.parquet` (~seconds; run first,
   it writes `ol_sides.parquet`)
 - `uv run python scripts/build_drive.py` → `data/processed/drive/*.parquet` (~seconds)
+- `uv run python scripts/analyze_drive.py` → trait models + correlations (~40 s)
 - `uv run pytest -q tests` · `uv run ruff check .`
 
 ## Layout
@@ -31,6 +32,8 @@ regular-season performance. See PLAN.md for rules, rubric, timeline and ideas.
   snaps (first step within 60 deg of upfield, |lateral| <= 1.5 yd through 1.5 s): get-off,
   first-step speed, upfield yd at 1.0/1.5/2.5 s, contact + drive after contact.
   Pulls (`pulls.py`) are parked until the pull-vs-zone labeling question is settled.
+- `src/bdb27/drive_models.py`: Combine trait → game drive outcome mixed models. Always control
+  T/G/C position (not just T vs. interior). Result so far is null (see PLAN.md, Result 1).
 - Missing metrics are null, not NaN (`fill_nan(None)`), so flags derived from them stay null.
 - `notebooks/`: numbered exploration notebooks.
 - `figures/`: exported figures for the writeup. `writeup/`: writeup drafts.

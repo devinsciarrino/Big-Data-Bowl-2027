@@ -124,6 +124,26 @@ couldn't separate them cleanly; see above). Working on **drive / downhill run bl
 - Next: Combine burst/measurables vs. game drive metrics (partial pooling by T vs. interior,
   controlling for draft pick), then drive metrics vs. run EPA through the lineman's gap.
 
+### Result 1 (2026-11-18): Combine traits do NOT predict game drive-block movement
+`scripts/analyze_drive.py` → `bdb27.drive_models`. Snap-level mixed models, one per
+(outcome, trait): 5 game outcomes (get-off, first-step speed, upfield yd at 1.0/2.5 s, drive
+after contact) × 13 traits (6 tracked 40-start metrics, 10-yd split, 40, weight, arm, broad,
+vertical, bench), controlling for T/G/C, down, short yardage, formation, random intercept per
+lineman (65–79 linemen with ≥ 20 drive snaps).
+- **Null.** 65 base fits: min FDR q = 0.90, 51% of effects in the favorable direction (coin
+  flip), median |effect| 0.10 lineman-level SDs. Same with + 10-yd split (min q 0.23) and
+  + draft pick (min q 0.83). Within-position Spearman: max |r| = 0.26; 1 of 65 CIs excludes 0
+  (vertical → yd at 1.0 s), about what chance gives.
+- **The tracked 40 start adds nothing over the stopwatch,** and if anything quick 40 starters
+  drive *less* after contact (peak accel → −0.35 SD, CI crosses 0).
+- **Trap avoided:** with only a tackle-vs-interior control, size looked predictive (arm length
+  → first-step speed r = 0.52). That was position: T > G > C on arms, weight and first-step speed,
+  and centers snap the ball. Within position it's 0.16. Always control T/G/C.
+- **Interpretation / possible story:** game get-off and first-step speed are *stable* lineman
+  traits (split-half 0.85–0.87) yet unrelated to anything measured at the Combine. That's a
+  skill the Combine misses. Next question: does in-game get-off matter (run EPA at his gap,
+  games started)? If yes, it's a finding NFL evaluators can use.
+
 ### Metrics to compare (same definition in drill and game)
 Get-off (time to first movement / first 1 yd), lateral acceleration and top lateral speed,
 time to 5 yd lateral, depth lost (how far he drops behind the line), path tightness (distance
