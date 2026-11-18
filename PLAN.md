@@ -98,6 +98,13 @@ Feasibility checks (scratch analysis, 2026-11-17):
   centers' runs, which is too high, so it's catching some wide outside-zone flow. Next, refine it
   with speed sustained through the pull, path shape, and/or similarity to the Combine drill paths.
 
+Side detection (2026-11-17, `bdb27.alignment`): 94.7% of OL snaps get a spot (LT/LG/C/RG/RT).
+Fit RMSE median 0.085 yd; game-level sides 97% unanimous; leave-one-game-out season side 87.5%.
+It shows the drop-back rule mixes schemes: only 30–40% of tackle "pulls" cross the formation
+(likely playside zone reach steps), while 77% of RT "lateral_flow" snaps cross (backside zone
+flow). **Next: cluster resampled 0–2.5 s paths (with side/crossing as features) to separate gap
+pulls, zone flow and reach steps, and check clusters against hand-labelled snaps.**
+
 ### Metrics to compare (same definition in drill and game)
 Get-off (time to first movement / first 1 yd), lateral acceleration and top lateral speed,
 time to 5 yd lateral, depth lost (how far he drops behind the line), path tightness (distance

@@ -18,7 +18,12 @@ regular-season performance. See PLAN.md for rules, rubric, timeline and ideas.
   field frame (origin = spot at snap, +x upfield, +y = offense's left). `flag_pulls()` labels
   lateral snaps `pull` vs `lateral_flow`; its thresholds are provisional.
   Tests in `tests/test_pulls.py` use synthetic paths (no data needed).
-- `notebooks/`: numbered exploration notebooks (`01_eda.ipynb`, …).
+- `src/bdb27/alignment.py`: infers LT/LG/C/RG/RT. `player_play` only says T/G/C and game
+  tracking has no ball, so `solve_slots()` fits slot assignments (1.55 yd spacing) on plays
+  with 2+ tracked rookie linemen; `player_sides()` propagates the majority side per
+  player-game → season → career (`side_source`). Game-level sides are ~97% self-consistent;
+  season/career fallbacks ~87% (rookies switch sides between games).
+- `notebooks/`: numbered exploration notebooks.
 - `figures/`: exported figures for the writeup. `writeup/`: writeup drafts.
 
 ## Constraints
